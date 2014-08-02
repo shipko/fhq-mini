@@ -53,11 +53,13 @@ class users extends CActiveRecord {
         if ($count > Yii::app()->params['paginator']['limit'])
             $count = Yii::app()->params['paginator']['limit'];
 
-        $offset = abs((int)Yii::app()->request->getParam('offset')) || '0';
+        $offset = abs((int)Yii::app()->request->getParam('offset'));
+	    if (!$offset)
+	    	$offset = 0;
 
-        echo $offset.','.$count;
 		$this->getDbCriteria()->mergeWith(array(
-			'limit' => $offset.','.$count
+			'limit' => $count,
+			'offset' => $offset
 		));
 
 		return $this;

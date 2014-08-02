@@ -98,4 +98,9 @@ class UserController extends CController
 		else
 			Message::Error($users->getErrors());
 	}
+
+	public function actionSearch() 
+	{
+
+	}
 }
