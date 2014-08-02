@@ -33,6 +33,28 @@ class QuestController extends CController
 	{
 		
 	}
+
+	public function actionAddSection()
+	{
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
+		$title = Yii::app()->request->getParam('title');
+		if (!$title)
+			Message::Error('Parameter title is missing');
+
+		$section = new QuestSection;
+		
+		$section->setIsNewRecord(true);
+		$section->title = $title;
+		$section->uuid = new CDbExpression('UUID()');
+
+		if ($section->save())
+			Message::Success(array('id' => $section->id));
+		else
+			Message::Error($section->getErrors());
+
+	}
 	public function actionGetProfileInfo()
 	{
 		$id = Yii::app()->params->user['user_id'];

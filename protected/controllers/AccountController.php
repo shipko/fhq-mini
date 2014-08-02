@@ -37,7 +37,7 @@ class AccountController extends CController
 		if (!Yii::app()->request->getParam('nick'))
 			Message::Error("Nick is empty");
 		
-		$users = Users::model()->findByPk(Yii::app()->params->user['user_id']);
+		$users = Users::model()->findByPk((int)Yii::app()->params->user['user_id']);
 
 		if (empty($users))
 			Message::Error('The user does not exist');
