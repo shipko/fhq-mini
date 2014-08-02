@@ -64,6 +64,18 @@ class users extends CActiveRecord {
 
 		return $this;
 	}
+
+	public function search($nick)
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => 'nick LIKE :nick',
+            'params' => array(
+                ':nick' => '%'.$nick.'%',
+            ),
+		));
+
+		return $this;
+	}
 	public function primaryKey() 
 	{
 		return 'id';

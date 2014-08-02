@@ -71,6 +71,7 @@ class UserController extends CController
 	// Не готово
 	public function actionEdit()
 	{
+		exit('method closed');
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 
@@ -101,6 +102,27 @@ class UserController extends CController
 
 	public function actionSearch() 
 	{
+		$nick = Yii::app()->request->getParam('nick');
+		if (!$nick)
+			Message::Error("Nick is empty");
 
+
+		$users = Users::model()->search($nick)->paginator()->findAll(array(
+		    'select' => 'id, role, nick, activated',
+		));
+
+		$array = array();
+		$count = 0;
+
+		foreach($users as $value) {
+			$count++;
+			// False - return without null values;
+			$array[] = $value->getAttributes(false);
+		}
+
+		Message::Success(array(
+			'count' => $count,
+			'items' => $array
+		));
 	}
 }
