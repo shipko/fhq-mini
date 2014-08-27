@@ -80,16 +80,84 @@ class QuestController extends CController
 			Message::Error('Quest is not found');
 
 		$out = $quest->getAttributes(false);
-		$out['section'] = $quest->stitle->title;
+
+		$out['section'] = array(
+			'id' => $out['section'],
+			'title' => $quest->stitle->title
+		);
 		
 		Message::Success($out);
 	}
 
 	public function actionSave() 
 	{
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
+
+		$quest = Quests::model()->findByPk($id);
 		
+		if(!$quest)
+			Message::Error('Quest is not found');
+
+		if (!Yii::app()->request->getParam('title'))
+			Message::Error('Parameter title is missing');
+
+		if (!(int)Yii::app()->request->getParam('section'))
+			Message::Error('Parameter section is missing');
+
+		if (!Yii::app()->request->getParam('short_text'))
+			Message::Error('Parameter short_text is missing');
+		
+		if (!Yii::app()->request->getParam('full_text'))
+			Message::Error('Parameter full_text is missing');
+
+		if (!Yii::app()->request->getParam('answer'))
+			Message::Error('Parameter answer is missing');
+
+		if (!(int)Yii::app()->request->getParam('score'))
+			Message::Error('Parameter score is missing');
+		
+		$section = QuestSection::model()->findByPk((int)Yii::app()->request->getParam('section'));
+		if (!$section)
+			Message::Error('Quest section does not exists');
+
+		$quest->title = Yii::app()->request->getParam('title');
+
+		$quest->section = $section->id;
+
+		$quest->short_text = Yii::app()->request->getParam('short_text');
+		$quest->full_text = Yii::app()->request->getParam('full_text');
+		$quest->answer = Yii::app()->request->getParam('answer');
+		$quest->score = (int)Yii::app()->request->getParam('score');
+		
+		if($quest->save())
+			Message::Success($quest->id);
+		else
+			Message::Error($quest->getErrors());
 	}
 
+	public function actionDelete() 
+	{
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
+
+		$quest = Quests::model()->findByPk($id);
+
+		if (empty($quest))
+			Message::Error('Quest section does not exist');
+
+		$quest->delete();
+
+		Message::Success('1');
+	}
 	public function actionListSection()
 	{
 		if (!Yii::app()->params->scopes('admin'))
@@ -201,60 +269,4 @@ class QuestController extends CController
 		Message::Success('1');
 	}
 
-	public function actionGetProfileInfo()
-	{
-		$id = Yii::app()->params->user['user_id'];
-		$user = Users::model()->findByPk($id,array(
-			'select' => 'id, role, nick, mail, activated, json_data, date_create, date_last_signin',
-			'condition'=>'id=:id',
-    		'params'=>array(':id'=> $id),
-		));
-
-		if(empty($user))
-			Message::Error('The user does not exist.');
-		
-		Message::Success($user->getAttributes(false));
-	
-	}
-
-	public function actionSaveProfileInfo()
-	{
-		if (!Yii::app()->request->getParam('mail'))
-			Message::Error("Mail is empty");
-
-		if (!Yii::app()->request->getParam('nick'))
-			Message::Error("Nick is empty");
-		
-		$users = Users::model()->findByPk(Yii::app()->params->user['user_id']);
-
-		if (empty($users))
-			Message::Error('The user does not exist');
-				
-		$users->mail = Yii::app()->request->getParam('mail');
-		$users->nick = Yii::app()->request->getParam('nick');
-		$users->json_data = Yii::app()->request->getParam('json_data');
-
-		$users->date_last_signup = new CDbExpression('NOW()');
-
-		
-		if ($users->save())
-			Message::Success('1');
-		else
-			Message::Error($users->getErrors());		
-	}
-
-	public function actionchangePassword()
-	{
-		if (!Yii::app()->request->getParam('pass'))
-			Message::Error("pass is empty");
-
-		$users = Users::model()->findByPk(Yii::app()->params->user['user_id']);
-		
-		if (empty($users))
-			Message::Error('The user does not exist');
-		
-		$id = Yii::app()->params->user['user_id'];
-		$pass = Yii::app()->request->getParam('pass'); 
-		Users::model()->updateByPk($id, array('pass' => $pass));
-	}
 }

@@ -34,7 +34,7 @@ class Quests extends CActiveRecord {
 	public function relations() 
 	{
 		return array(
-            'stitle'=>array(self::BELONGS_TO, 'QuestSection', 'id'),
+            'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
         );
 	}
 
