@@ -158,6 +158,41 @@ class QuestController extends CController
 
 		Message::Success('1');
 	}
+
+
+	public function actionList()
+	{
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+		
+		$section = Quests::model()->
+			published('')->
+			with(array(
+				'stitle' => array(
+					'select' => 'id, title'
+				)
+			))->
+			paginator()->
+			findAll(array('select' => 'id, title, section, short_text, full_text, score'));
+		// print_r($section);
+		$array = array();
+		$count = 0;
+
+		foreach($section as $value) {
+			$count++;
+			// False - return without null values;
+			$arr = $value->getAttributes(false);
+			$arr['section'] = $value->stitle->getAttributes(false);
+			
+			$array[] = $arr;
+		}
+
+		Message::Success(array(
+			'count' => $count,
+			'items' => $array
+		));
+	}
+
 	public function actionListSection()
 	{
 		if (!Yii::app()->params->scopes('admin'))

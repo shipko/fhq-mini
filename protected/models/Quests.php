@@ -41,12 +41,31 @@ class Quests extends CActiveRecord {
 	public function published($desc=' DESC')
 	{
 		$this->getDbCriteria()->mergeWith(array(
-			'order' => 'id'.$desc,
+			'order' => 't.id'.$desc,
 		));
 
 		return $this;
 	}
 
+	public function paginator() {
+		$count = abs((int)Yii::app()->request->getParam('count'));
+		if (!$count)
+			$count = Yii::app()->params['paginator']['count'];
+
+        if ($count > Yii::app()->params['paginator']['limit'])
+            $count = Yii::app()->params['paginator']['limit'];
+
+        $offset = abs((int)Yii::app()->request->getParam('offset'));
+	    if (!$offset)
+	    	$offset = 0;
+
+		$this->getDbCriteria()->mergeWith(array(
+			'limit' => $count,
+			'offset' => $offset
+		));
+
+		return $this;
+	}
 	public function primaryKey() 
 	{
 		return 'id';
