@@ -7,7 +7,7 @@
 class TokenController extends CController
 {
 	private $method = 'token';
-// 	Авторизация
+	// 	Авторизация
  	public function actionAuth()
 	{
 		if (!Yii::app()->request->getParam('client_id')) 
@@ -26,7 +26,7 @@ class TokenController extends CController
 		if (!$user)
 			Message::Error('Username or password is incorrect');
 		
-		if (!CPasswordHelper::verifyPassword(Yii::app()->request->getParam('password'), $user->pass)
+		if (!CPasswordHelper::verifyPassword(Yii::app()->request->getParam('password'), $user->pass))
 			Message::Error('Username or password is incorrect');
 		// Пока закомментировано
 		// Логин и пароль совпали
@@ -67,5 +67,12 @@ class TokenController extends CController
 		// else
 		// 	Message::Error($users->getErrors());
 
+	}
+	/**
+	 * Index action is the default action in a controller.
+	 */
+	public function actionIndex()
+	{
+		echo 'Hello World';
 	}
 }

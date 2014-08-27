@@ -1,5 +1,5 @@
 <?php
-class quests extends CActiveRecord {
+class Quests extends CActiveRecord {
 	public $date_create;
 
 	public $date_change;
@@ -12,16 +12,30 @@ class quests extends CActiveRecord {
 	public function rules()
 	{
 		return array(
-			array('title','length','max'=>255),
-			array('title','required'),
-			array('uuid_team, rating, title, owner, date_create, date_change', 'required'),
-			array('date_create, date_change', 
-				'default',
-				'value'=>new CDbExpression('NOW()'),
-				'setOnEmpty'=>false,
-				'on'=>'insert'
-				),
+			// required
+			array('title, section, owner, moderate, short_text, full_text, answer, score, time','required'),
+			
+			//length
+			array('title','length','min'=>3,'max'=>100),
+			array('short_text','length','min'=>5),
+			array('full_text','length','min'=>20),
+			array('answer', 'length','min'=>8,'max'=>255),
+
+			//
+			// array('date_create, date_change', 
+			// 	'default',
+			// 	'value'=>new CDbExpression('NOW()'),
+			// 	'setOnEmpty'=>false,
+			// 	'on'=>'insert'
+			// 	),
 			);
+	}
+
+	public function relations() 
+	{
+		return array(
+            'stitle'=>array(self::BELONGS_TO, 'QuestSection', 'id'),
+        );
 	}
 
 	public function published($desc=' DESC')
@@ -33,22 +47,12 @@ class quests extends CActiveRecord {
 		return $this;
 	}
 
-	public function beforeSave()
-	{
-		if ($this->isNewRecord) {
-			$this->date_create = new CDbExpression('NOW()');
-		}
-
-		$this->date_change = new CDbExpression('NOW()');
-
-		return parent::beforeSave();
-	}
 	public function primaryKey() 
 	{
 		return 'id';
 	}
-	public function teams()
+	public function tableName()
 	{
-		return 'teams';
+		return '{{quests}}';
 	}
 }

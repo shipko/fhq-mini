@@ -14,7 +14,7 @@ class users extends CActiveRecord {
 		return array(
 
 			array('nick','length','max'=>30),
-			array('password'.'length','min'=>6,'max'=>32)
+			array('password'.'length','min'=>6,'max'=>32),
 			array('uuid, role, nick, pass, mail, rating, activated, date_create, date_last_signup', 'required'),
 			array('nick, password, mail', 'filter', 'filter' => 'trim'),
 			array('date_create, date_last_signup', 

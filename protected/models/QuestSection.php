@@ -15,6 +15,13 @@ class QuestSection extends CActiveRecord {
 		);
 	}
 
+	public function relations()
+	{
+		return array(
+			//'posts' => array(self::HAS_MANY, 'Quest', 'author_id'),
+		);
+	}
+
 	public function published($desc=' DESC')
 	{
 		$this->getDbCriteria()->mergeWith(array(
