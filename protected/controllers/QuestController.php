@@ -183,7 +183,7 @@ class QuestController extends CController
 			// False - return without null values;
 			$arr = $value->getAttributes(false);
 			$arr['section'] = $value->stitle->getAttributes(false);
-			
+
 			$array[] = $arr;
 		}
 
@@ -191,6 +191,26 @@ class QuestController extends CController
 			'count' => $count,
 			'items' => $array
 		));
+	}
+
+	public function actionPass()
+	{
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
+
+		$answer = Yii::app()->request->getParam('answer');
+		if (!$answer)
+			Message::Error('Parameter answer is missing');
+
+		$quest = Quests::model()->findByPk($id);
+		
+		if(!$quest)
+			Message::Error('Quest is not found');
+
+		$success = ($quest->answer == $answer);
+		
+		Message::Success($success);
 	}
 
 	public function actionListSection()

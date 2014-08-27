@@ -39,7 +39,9 @@ class AuthController extends CController
 		$users->rating = 0;
 		$users->date_create = new CDbExpression('NOW()');
 		$users->date_last_signup = new CDbExpression('NOW()');
-
+		
+		// Потенциальная уязвимость!!!
+		$users->ip = $_SERVER['REMOTE_ADDR'];
 		if ($users->save())
 			Message::Success(array('id' => $users->id));
 		else
