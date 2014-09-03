@@ -42,10 +42,41 @@ class AuthController extends CController
 		
 		// Потенциальная уязвимость!!!
 		$users->ip = $_SERVER['REMOTE_ADDR'];
+		
 		if ($users->save())
 			Message::Success(array('id' => $users->id));
 		else
 			Message::Error($users->getErrors());
 
+	}
+
+	public function actionRestore() 
+	{
+		$mail = Yii::app()->request->getParam('mail');
+		if (!$mail)
+			Message::Error('Parameter mail is missing');
+		
+		$validator = new CEmailValidator;
+		if (!$validator->validateValue($mail))
+			Message::Error('It is not mail');
+
+		$users = Users::model()->findByAttributes(array('mail' => $mail));	
+		if (!$users)
+			Message::Error('User not found');
+
+		// $users->activation_code = uniqid();
+
+		// print_r(Yii::app());
+		EMail::mailsend(array(
+			'subject' => 'Restore password to your account on FreeHackQuest.',
+			'to' => $mail,
+			'text' => 'Restore: </br>
+
+	Somebody (may be you) reseted your password on '.Yii::app()->name.'</br>
+	Your new password: test</br>'
+
+			));
+		//$users->save();
+			Message::Success(array('success' => true));
 	}
 }

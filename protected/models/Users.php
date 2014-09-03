@@ -15,25 +15,25 @@ class users extends CActiveRecord {
 
 			array('nick','length','max'=>30),
 			array('password'.'length','min'=>6,'max'=>32),
-			array('uuid, role, nick, pass, mail, rating, activated, date_create, date_last_signup', 'required'),
+			array('uuid, role, nick, pass, mail, rating, activated, activation_code, date_create, date_last_signup', 'required'),
 			array('nick, password, mail', 'filter', 'filter' => 'trim'),
-			array('date_create, date_last_signup', 
-				'default',
-				'value'=>new CDbExpression('NOW()'),
-				'setOnEmpty'=>false,
-				'on'=>'insert'
-				),
+			// array('date_last_signup', 
+			// 	'default',
+			// 	'value'=>new CDbExpression('NOW()'),
+			// 	'setOnEmpty'=>false,
+			// 	'on'=>'insert'
+			// 	),
 			);
 	}
 
 	public function beforeSave()
 	{
 		if ($this->isNewRecord) {
-			$this->date_create = new CDbExpression('NOW()');
+			// $this->date_create = new CDbExpression('NOW()');
 			$this->rating = 0;
 		}
 
-		$this->date_last_signup = new CDbExpression('NOW()');
+		// $this->date_last_signup = new CDbExpression('NOW()');
 
 		return parent::beforeSave();
 	}

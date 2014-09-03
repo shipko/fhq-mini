@@ -8,7 +8,6 @@ class TeamsController extends CController
 {
 	private $method = 'teams';
 
-	// Не готово
 	public function actionCreate()
 	{
 		if (!Yii::app()->params->log_in)
@@ -74,22 +73,24 @@ class TeamsController extends CController
 			Message::Error('Parameter id is missing');
 
 		$id = (int)Yii::app()->request->getParam('id');
-		$users = Teams::model()->findByPk($id,array(
+		$games = Teams::model()->findByPk($id,array(
 			'select' => 'id, json_data, date_create, date_last_signin',
 			'condition'=>'id=:id',
     		'params'=>array(':id'=> $id),
 		));
 
-		if(empty($users))
+		if(empty($games))
 			Message::Error('The user does not exist.');
 		
-		Message::Success($users->getAttributes(false));
+		Message::Success($games->getAttributes(false));
 	}
 
 	public function actionDelete()
 	{
 		if (!Yii::app()->params->log_in)
 			Message::Error('You are not logged');
+
+		$teams = Teams::model()->
 
 		if (!Yii::app()->params->scopes('admin'))
 			Message::Error("You do not have sufficient permissions");
