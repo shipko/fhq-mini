@@ -80,7 +80,7 @@ class TeamsController extends CController
 		));
 
 		if(empty($games))
-			Message::Error('The user does not exist.');
+			Message::Error('The games does not exist.');
 		
 		Message::Success($games->getAttributes(false));
 	}
@@ -90,22 +90,31 @@ class TeamsController extends CController
 		if (!Yii::app()->params->log_in)
 			Message::Error('You are not logged');
 
-		$teams = Teams::model()->
-
-		if (!Yii::app()->params->scopes('admin'))
-			Message::Error("You do not have sufficient permissions");
-
-		if (!Yii::app()->request->getParam('id'))
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id) 
 			Message::Error('Parameter id is missing');
 
-		$users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
+		$teams = Teams::model()->findByPk($id);
 
-		if (empty($users))
-			Message::Error('The user does not exist');
+		if (!$teams)
+			Message::Error("The team doesn't exists");
 
-		$users->delete();
+		print_r($teams);
 
-		Message::Success('1');
+		// if (!Yii::app()->params->scopes('admin'))
+		// 	Message::Error("You do not have sufficient permissions");
+
+		// if (!Yii::app()->request->getParam('id'))
+		// 	Message::Error('Parameter id is missing');
+
+		// $users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
+
+		// if (empty($users))
+		// 	Message::Error('The user does not exist');
+
+		// $users->delete();
+
+		// Message::Success('1');
 	}
 
 	// Не готово

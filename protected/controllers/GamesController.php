@@ -16,6 +16,9 @@ class GamesController extends CController
 
 	public function actionCreate()
 	{
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
 		if (!Yii::app()->request->getParam('title'))
 			Message::Error("Title is empty");
 
@@ -42,15 +45,17 @@ class GamesController extends CController
 		if (Yii::app()->request->getParam('date_stop'))
 			$games->date_stop = Yii::app()->request->getParam('date_stop'); // Нужно проверить
 		else
-			$games->date_stop = time();
+			$games->date_stop = time(); // не работает!
 
 		$games->rating = 0;
 		$games->owner = Yii::app()->params->user['user_id'];
 
 		$games->uuid_game = new CDbExpression('UUID()');
 
-		$games->json_data = new CDbExpression('UUID()');
-		$games->json_security_data = new CDbExpression('UUID()');
+		$games->json_data = CJSON::encode(array());
+		$games->json_security_data = CJSON::encode(array());
+
+		$games->rules = Yii::app()->request->getParam('rules');
 
 		if ($games->save())
 			Message::Success('1');
@@ -60,14 +65,14 @@ class GamesController extends CController
 
 	public function actionList()
 	{
-		$pages = Pages::model()->findAll(array(
-			'select' => 'id, title',
+		$games = Games::model()->findAll(array(
+			'select' => 'id, title, owner, rules, date_start',
 		));
 		
 		$array = array();
 		$count = 0;
 
-		foreach($pages as $value) {
+		foreach($games as $value) {
 			$count++;
 			// False - return without null values;
 			$array[] = $value->getAttributes(false);
@@ -84,16 +89,14 @@ class GamesController extends CController
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 
-		$pages = Users::model()->findByPk(Yii::app()->request->getParam('id'),array(
-			'select' => 'id,title,text',
-			'condition'=>'id=:id',
-    		'params'=>array(':id'=> Yii::app()->request->getParam('id')),
+		$games = Games::model()->findByPk(Yii::app()->request->getParam('id'),array(
+			'select' => 'id, title, owner, rules, date_start'
 		));
 
-		if(empty($pages))
-			Message::Error('The pages does not exist.');
+		if(empty($games))
+			Message::Error('The games does not exist.');
 		
-		Message::Success($pages->getAttributes(false));
+		Message::Success($games->getAttributes(false));
 	}
 
 	public function actionDelete()
@@ -101,12 +104,12 @@ class GamesController extends CController
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 
-		$pages = Pages::model()->findByPk((int)Yii::app()->request->getParam('id'));
+		$games = Games::model()->findByPk((int)Yii::app()->request->getParam('id'));
 
-		if (empty($pages))
-			Message::Error('The pages does not exist');
+		if (empty($games))
+			Message::Error('The games does not exist');
 
-		$pages->delete();
+		$games->delete();
 
 		Message::Success('1');
 	}

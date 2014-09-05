@@ -1,9 +1,5 @@
 <?php
 class Games extends CActiveRecord {
-	public $date_create;
-
-	public $date_change;
-
 	public static function model($classname=__CLASS__)
 	{
 		return parent::model($classname);
