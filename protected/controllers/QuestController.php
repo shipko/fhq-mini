@@ -193,6 +193,10 @@ class QuestController extends CController
 		));
 	}
 
+	public function actionTake()
+	{
+
+	}
 	public function actionPass()
 	{
 		$id = (int)Yii::app()->request->getParam('id');
@@ -208,11 +212,78 @@ class QuestController extends CController
 		if(!$quest)
 			Message::Error('Quest is not found');
 
+		$attempts = new Attempts();
+
+		$attempts->user = Yii::app()->params->user['user_id'];
+		$attempts->quest = $quest->id;
+		
+		$attempts->user_answer = $answer;
+		$attempts->real_answer = $quest->answer;
+
+		$attempts->time = new CDbExpression('NOW()');
+
+		if(!$attempts->save()) 
+		{
+			Message::Error($attempts->getErrors());			
+		}
+
 		$success = ($quest->answer == $answer);
 		
+
 		Message::Success($success);
 	}
 
+	public function actionAddGames() {
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+		
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
+
+		$games_id = (int)Yii::app()->request->getParam('games_id');
+		if (!$games_id)
+			Message::Error('Parameter games_id is missing');
+
+		$quest = Quests::model()->findByPk($id);
+	
+		if(!$quest)
+			Message::Error('Quest is not found');
+
+		$games = Games::model()->findByPk($games_id);
+		
+		if(!$games)
+			Message::Error('Games is not found');
+
+		$quest->games = $games->id;
+
+		if ($quest->save())
+			Message::Success(array('id' => $quest->id));
+		else
+			Message::Error($quest->getErrors());
+	}
+
+	public function actionRemoveGames() {
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+		
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
+
+		$quest = Quests::model()->findByPk($id);
+	
+		if(!$quest)
+			Message::Error('Quest is not found');
+
+
+		$quest->games = 0;
+
+		if ($quest->save())
+			Message::Success(array('id' => $quest->id));
+		else
+			Message::Error($quest->getErrors());
+	}
 	public function actionListSection()
 	{
 		if (!Yii::app()->params->scopes('admin'))
