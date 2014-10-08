@@ -98,10 +98,7 @@ class QuestController extends CController
 		if (!$id)
 			Message::Error('Parameter id is missing');
 
-		$quest = Quests::model()->findByPk($id);
-		
-		if(!$quest)
-			Message::Error('Quest is not found');
+		$quest = $this->getQuest($id);
 
 		if (!Yii::app()->request->getParam('title'))
 			Message::Error('Parameter title is missing');
@@ -149,10 +146,7 @@ class QuestController extends CController
 		if (!$id)
 			Message::Error('Parameter id is missing');
 
-		$quest = Quests::model()->findByPk($id);
-
-		if (empty($quest))
-			Message::Error('Quest section does not exist');
+		$quest = $this->getQuest($id);
 
 		$quest->delete();
 
@@ -195,7 +189,34 @@ class QuestController extends CController
 
 	public function actionTake()
 	{
+		$id = (int)Yii::app()->request->getParam('id');
+		if (!$id)
+			Message::Error('Parameter id is missing');
 
+		$check_user_quest = UserQuest::model()->find('quest=:quest_id AND user=:user_id', array(
+			':quest_id'=>$id,
+			':user_id'=>Yii::app()->params->user['user_id'],
+		));
+		
+		if ($check_user_quest) {
+			Message::Error('You are already take this quest');
+		}
+
+		$quest = $this->getQuest($id, array('with' => 'stitle'));
+		$attr = $quest->attributes;
+		$attr['section'] = $quest->getRelated('stitle');
+
+		$user_quest = new UserQuest();
+
+		$user_quest->user = Yii::app()->params->user['user_id'];
+		$user_quest->quest = $quest->id;
+		$user_quest->start_time = time();
+		$user_quest->end_time = 0;
+
+		if ($user_quest->save())	
+			Message::Success($attr);
+		else
+			Message::Error($user_quest->getErrors());
 	}
 	public function actionPass()
 	{
@@ -207,10 +228,17 @@ class QuestController extends CController
 		if (!$answer)
 			Message::Error('Parameter answer is missing');
 
-		$quest = Quests::model()->findByPk($id);
-		
-		if(!$quest)
-			Message::Error('Quest is not found');
+		$quest = $this->getQuest($id);
+
+		$user_quest = UserQuest::model()->find('user=:user_id AND quest=:quest_id', array(
+				':user_id' => Yii::app()->params->user['user_id'],
+				':quest_id' => $id
+			)
+		);
+
+		if(!$user_quest) {
+			Message::Error('You are not take this quest');
+		}
 
 		$attempts = new Attempts();
 
@@ -228,6 +256,15 @@ class QuestController extends CController
 		}
 
 		$success = ($quest->answer == $answer);
+
+		if ($success) {
+			$user_quest->end_time = time();
+			
+			if (!$user_quest->save())
+				Message::Error($user_quest->getErrors());
+
+		}
+		
 		
 
 		Message::Success($success);
@@ -245,11 +282,8 @@ class QuestController extends CController
 		if (!$games_id)
 			Message::Error('Parameter games_id is missing');
 
-		$quest = Quests::model()->findByPk($id);
-	
-		if(!$quest)
-			Message::Error('Quest is not found');
-
+		$quest = $this->getQuest($id);
+		
 		$games = Games::model()->findByPk($games_id);
 		
 		if(!$games)
@@ -271,11 +305,7 @@ class QuestController extends CController
 		if (!$id)
 			Message::Error('Parameter id is missing');
 
-		$quest = Quests::model()->findByPk($id);
-	
-		if(!$quest)
-			Message::Error('Quest is not found');
-
+		$quest = $this->getQuest($id);
 
 		$quest->games = 0;
 
@@ -395,4 +425,17 @@ class QuestController extends CController
 		Message::Success('1');
 	}
 
+	/*
+	 * $id - id quests
+	 * $options - array 
+	*/
+	private function getQuest($id, $options=array())
+	{
+		$quest = Quests::model()->with(isset($options['with']) ? $options['with'] : false)->findByPk($id);
+		
+		if(!$quest)
+			Message::Error('Quest is not found');
+
+		return $quest;
+	}
 }

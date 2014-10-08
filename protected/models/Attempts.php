@@ -1,8 +1,5 @@
 <?php
 class Attempts extends CActiveRecord {
-	public $date_create;
-
-	public $date_change;
 
 	public static function model($classname=__CLASS__)
 	{
@@ -21,36 +18,16 @@ class Attempts extends CActiveRecord {
 			array('user_answer', 'length','min'=>8,'max'=>255),
 			array('real_answer','length','min'=>8,'max'=>255),
 			array('user_answer', 'filter', 'filter' => 'trim'),
-			//
-			// array('date_create, date_change', 
-			// 	'default',
-			// 	'value'=>new CDbExpression('NOW()'),
-			// 	'setOnEmpty'=>false,
-			// 	'on'=>'insert'
-			// 	),
-			);
+		);
 	}
 
-	public function relations() 
-	{
-		return array(
-            'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
-        );
-	}
-
-	public function published($desc=' DESC')
-	{
-		$this->getDbCriteria()->mergeWith(array(
-			'order' => 't.id'.$desc,
-		));
-
-		return $this;
-	}
-
-	// public function primaryKey() 
+	// public function relations() 
 	// {
-	// 	return 'id';
+	// 	return array(
+ //            'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
+ //        );
 	// }
+
 	public function tableName()
 	{
 		return '{{attempts}}';
