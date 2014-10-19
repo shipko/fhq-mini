@@ -1,2 +1,2 @@
 #!/bin/bash
-pdflatex api
+pdflatex fhq-api
