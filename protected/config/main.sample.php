@@ -15,10 +15,11 @@ return array(
 	'components'=>array(
 		'db'=>array(
 			'class'=>'system.db.CDbConnection',
-			'connectionString' => 'mysql:host=;dbname=',
+			'connectionString' => 'mysql:host=127.0.0.1;dbname=example',
 			'emulatePrepare' => true,
-			'username' => '',
-			'password' => '',
+			'enableProfiling' => true,
+			'username' => 'username',
+			'password' => 'password',
 			'charset' => 'utf8',
 			'tablePrefix' => '',
 		),
@@ -37,6 +38,21 @@ return array(
 				array('<controller>/<action>', 'pattern' => 'method/<controller:\w+>.<action:\w+>', 'verb'=>'POST'),
 			),
 		),
+		'mail' => array(
+		    'class' => 'application.extensions.yii-mail.YiiMail',
+		    'transportType' => 'smtp',
+		    'transportOptions' => array(
+		        'host' => 'smtp.example.ru',
+		        'username' => 'my@mail.ru',
+		        'password' => 'password',
+		        'port' => '465',
+		        'encryption'=>'tls',
+		    ),
+		    
+		    'viewPath' => 'application.views.mail',
+		    'logging' => true,
+		    'dryRun' => false
+		),
 	),
 
 	'params'=>array(
@@ -46,6 +62,10 @@ return array(
 		'log_in' => false,
 		'registration_allow' => true, //Позволить пользователям регистрироваться
 		'send_mail_allow' => true, // Позволить серверу отправлять письма
+		'mail' => array(
+			'from' => 'my@mail.ru', // адрес отправителя
+			'author' => 'Dmitry Mukovkin',
+		),
 		'paginator' => array(
 			'count' => 50, // Количество записей, выдаваемых API по умолчанию
 			'limit' => 500, // Максимальное количество записей
