@@ -1,2 +1,4 @@
 #!/bin/bash
-pdflatex api
+
+git rev-list HEAD --count . > base/version.tex
+pdflatex fhq-api
