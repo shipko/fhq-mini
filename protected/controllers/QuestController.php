@@ -156,11 +156,12 @@ class QuestController extends CController
 
 	public function actionList()
 	{
-		if (!Yii::app()->params->scopes('admin'))
-			Message::Error("You do not have sufficient permissions");
+		// if (!Yii::app()->params->scopes('admin'))
+		// 	Message::Error("You do not have sufficient permissions");
 		
 		$section = Quests::model()->
 			published('')->
+			showHide(Yii::app()->params->scopes('admin'))->
 			with(array(
 				'stitle' => array(
 					'select' => 'id, title'
@@ -172,6 +173,11 @@ class QuestController extends CController
 		$array = array();
 		$count = 0;
 
+		$userquest = UserQuest::model()->find('user=:user_id', array(
+				':user_id' => Yii::app()->params->user['user_id'],
+			)
+		);
+		print_r($userquest);
 		foreach($section as $value) {
 			$count++;
 			// False - return without null values;
@@ -240,6 +246,10 @@ class QuestController extends CController
 			Message::Error('You are not take this quest');
 		}
 
+		if($user_quest->end_time > 0) {
+			Message::Error('You are already pass this quest');	
+		}
+
 		$attempts = new Attempts();
 
 		$attempts->user = Yii::app()->params->user['user_id'];
@@ -259,14 +269,15 @@ class QuestController extends CController
 
 		if ($success) {
 			$user_quest->end_time = time();
-			
+			// Обновляем рейтинг пользователя
+			$users = Users::model()->findByPk($id);
+			Users::model()->updateByPk($id, array('rating' => ($users->rating + $quest->score)));
+
 			if (!$user_quest->save())
 				Message::Error($user_quest->getErrors());
 
 		}
 		
-		
-
 		Message::Success($success);
 	}
 

@@ -48,7 +48,7 @@ class AccountController extends CController
 
 		$users->date_last_signup = new CDbExpression('NOW()');
 
-		
+
 		if ($users->save())
 			Message::Success('1');
 		else
@@ -82,4 +82,5 @@ class AccountController extends CController
 		Users::model()->updateByPk($id, array('pass' => $pass));
 		Message::Success('1');
 	}
+
 }

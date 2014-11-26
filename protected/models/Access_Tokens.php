@@ -11,10 +11,11 @@ class access_tokens extends CActiveRecord {
 	}
 	public function setToken($user_id, $scope) {
 		$this->user_id = $user_id;
-		$this->access_token = hash('sha256', microtime());
+		$this->access_token = hash('sha256', md5(rand(0, 1000000)).microtime());
 		$this->scope = $scope;
 		$this->expires_in = time() + Yii::App()->params->tokenExpiresIn;
 		$this->issue_time = time();
+		$this->ip = CHttpRequest::getUserHostAddress();
 
 		$this->save();
 

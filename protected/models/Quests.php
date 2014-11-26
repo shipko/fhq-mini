@@ -66,6 +66,17 @@ class Quests extends CActiveRecord {
 
 		return $this;
 	}
+
+	function showHide($access) {
+		if($access) {
+			// $this->getDbCriteria()->mergeWith(array(
+			// 	'order' => 't.id'.$desc,
+			// ));			
+		}
+		
+		return $this;
+	}
+
 	public function primaryKey() 
 	{
 		return 'id';
