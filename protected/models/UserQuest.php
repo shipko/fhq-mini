@@ -13,6 +13,7 @@ class UserQuest extends CActiveRecord {
 			array('user, quest, start_time, end_time','required'),
 			
 			//length
+			array('id', 'numerical', 'integerOnly' => true),
 			array('user', 'numerical', 'integerOnly'=>true),
 			array('quest', 'numerical', 'integerOnly'=>true),
 			array('start_time', 'numerical', 'integerOnly'=>true),

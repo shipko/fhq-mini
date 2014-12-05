@@ -1,8 +1,5 @@
 <?php
 class Quests extends CActiveRecord {
-	public $date_create;
-
-	public $date_change;
 
 	public static function model($classname=__CLASS__)
 	{
@@ -16,6 +13,7 @@ class Quests extends CActiveRecord {
 			array('title, section, owner, moderate, short_text, full_text, answer, score, time','required'),
 			
 			//length
+			array('id', 'numerical', 'integerOnly' => true),
 			array('title','length','min'=>3,'max'=>100),
 			array('short_text','length','min'=>5),
 			array('full_text','length','min'=>20),
@@ -35,6 +33,7 @@ class Quests extends CActiveRecord {
 	{
 		return array(
             'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
+            'pass' => array(self::HAS_MANY, 'UserQuest','quest')
         );
 	}
 

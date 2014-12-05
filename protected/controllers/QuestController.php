@@ -165,25 +165,42 @@ class QuestController extends CController
 			with(array(
 				'stitle' => array(
 					'select' => 'id, title'
+				),
+				'pass' => array(
+					'select' => 'id, start_time, end_time',
+					'condition' => 'pass.user='.Yii::app()->params->user['user_id'] 
 				)
 			))->
 			paginator()->
-			findAll(array('select' => 'id, title, section, short_text, full_text, score'));
-		// print_r($section);
-		$array = array();
-		$count = 0;
+			findAll(array('select' => 't.id, title, section, short_text, full_text, score'));
 
-		$userquest = UserQuest::model()->find('user=:user_id', array(
-				':user_id' => Yii::app()->params->user['user_id'],
-			)
-		);
-		print_r($userquest);
+		$array = array(); 
+		$count = 0;
+		// print_r($section);
+		// $userquest = UserQuest::model()->find('user=:user_id', array(
+		// 		':user_id' => Yii::app()->params->user['user_id'],
+		// 	)
+		// );
+		// print_r($userquest);
 		foreach($section as $value) {
 			$count++;
+
+			if (!empty($value->pass)) {
+				$pass = $value->pass[0]->getAttributes(false);
+				// Проверяем сдал ли пользователь квест
+				if ($pass['end_time'] > 0)
+					$passquest = true;
+				else
+					$passquest = false;
+
+			}
+			else
+				$passquest = false;
+			
 			// False - return without null values;
 			$arr = $value->getAttributes(false);
 			$arr['section'] = $value->stitle->getAttributes(false);
-
+			$arr['pass'] = $passquest;
 			$array[] = $arr;
 		}
 
@@ -208,8 +225,12 @@ class QuestController extends CController
 			Message::Error('You are already take this quest');
 		}
 
-		$quest = $this->getQuest($id, array('with' => 'stitle'));
-		$attr = $quest->attributes;
+		$quest = $this->getQuest($id, array(
+			'with' => 'stitle', 
+			'fields' => 'full_text, id, score, short_text, title'
+		));
+		
+		$attr = $quest->getAttributes(false);
 		$attr['section'] = $quest->getRelated('stitle');
 
 		$user_quest = new UserQuest();
@@ -442,7 +463,9 @@ class QuestController extends CController
 	*/
 	private function getQuest($id, $options=array())
 	{
-		$quest = Quests::model()->with(isset($options['with']) ? $options['with'] : false)->findByPk($id);
+		$quest = Quests::model()->with(isset($options['with']) ? $options['with'] : false)->findByPk($id, array(
+			'select' => isset($options['fields']) ? $options['fields'] : '*'
+		));
 		
 		if(!$quest)
 			Message::Error('Quest is not found');

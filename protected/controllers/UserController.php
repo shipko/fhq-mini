@@ -11,7 +11,7 @@ class UserController extends CController
 	public function actionList()
 	{
 		$users = Users::model()->published('')->paginator()->findAll(array(
-			'select' => 'id, role, nick, activated',
+			'select' => 'id, role, nick, activated, rating',
 			//'condition' => 'deleted=0' //проверка на удаление 
 		));
 		
