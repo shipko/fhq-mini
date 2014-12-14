@@ -176,23 +176,15 @@ class QuestController extends CController
 
 		$array = array(); 
 		$count = 0;
-		// print_r($section);
-		// $userquest = UserQuest::model()->find('user=:user_id', array(
-		// 		':user_id' => Yii::app()->params->user['user_id'],
-		// 	)
-		// );
-		// print_r($userquest);
+
 		foreach($section as $value) {
 			$count++;
 
 			if (!empty($value->pass)) {
 				$pass = $value->pass[0]->getAttributes(false);
 				// Проверяем сдал ли пользователь квест
-				if ($pass['end_time'] > 0)
-					$passquest = true;
-				else
-					$passquest = false;
-
+				$passquest = ($pass['end_time'] > 0);
+				
 			}
 			else
 				$passquest = false;
@@ -262,7 +254,7 @@ class QuestController extends CController
 				':quest_id' => $id
 			)
 		);
-
+		
 		if(!$user_quest) {
 			Message::Error('You are not take this quest');
 		}
@@ -279,7 +271,7 @@ class QuestController extends CController
 		$attempts->user_answer = $answer;
 		$attempts->real_answer = $quest->answer;
 
-		$attempts->time = new CDbExpression('NOW()');
+		$attempts->time = time();
 
 		if(!$attempts->save()) 
 		{
@@ -291,8 +283,8 @@ class QuestController extends CController
 		if ($success) {
 			$user_quest->end_time = time();
 			// Обновляем рейтинг пользователя
-			$users = Users::model()->findByPk($id);
-			Users::model()->updateByPk($id, array('rating' => ($users->rating + $quest->score)));
+			$users = Users::model()->findByPk(Yii::app()->params->user['user_id']);
+			Users::model()->updateByPk(Yii::app()->params->user['user_id'], array('rating' => ($users->rating + $quest->score)));
 
 			if (!$user_quest->save())
 				Message::Error($user_quest->getErrors());

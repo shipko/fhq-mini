@@ -21,8 +21,10 @@ class TimerController extends CController
 		}
 
 		$diff = Yii::app()->params->timer['start'] - time();
+		$diffEnd = Yii::app()->params->timer['end'] - time();
 		Message::Success(array(
-			'start' => ($diff > 0 ? $diff : 0)
+			'start' => ($diff > 0 ? $diff : 0),
+			'end' => ($diffEnd > 0 ? $diffEnd : 0)
 		));
 	}
 	
