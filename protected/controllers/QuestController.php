@@ -403,7 +403,24 @@ class QuestController extends CController
 
 	}
 
-	public function actionEditSection()
+	public function actionGetAttempts() {
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
+		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published()->findAll();
+		//print_r($attempts);
+		$arrray = array();
+		foreach($attempts as $key => $value) {
+			$record = $value->getAttributes();
+			
+			$record['quest'] = $value->quests->getAttributes(false);
+			$record['quest']['section'] = $value->quest_section->getAttributes(false)['title'];
+			$array[] = $record;
+		}
+		Message::Success($array);
+	}
+
+	public function actionEditSection()	
 	{
 		if (!Yii::app()->params->scopes('admin'))
 			Message::Error("You do not have sufficient permissions");

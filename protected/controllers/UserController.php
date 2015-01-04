@@ -36,7 +36,7 @@ class UserController extends CController
 			Message::Error('Parameter id is missing');
 
 		$users = Users::model()->findByPk(Yii::app()->request->getParam('id'),array(
-			'select' => 'id, role, nick, activated, json_data, date_create, date_last_signin',
+			'select' => 'id, role, nick, activated, rating, json_data, date_create, date_last_signin',
 			'condition'=>'id=:id',
     		'params'=>array(':id'=> Yii::app()->request->getParam('id')),
 		));

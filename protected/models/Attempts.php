@@ -21,13 +21,24 @@ class Attempts extends CActiveRecord {
 		);
 	}
 
-	// public function relations() 
-	// {
-	// 	return array(
- //            'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
- //        );
-	// }
+	public function relations() 
+	{
+		return array(
+            'quests' => array(self::BELONGS_TO, 'Quests', 'quest'),
+            'quest_section' => array(self::HAS_ONE, 'QuestSection', array('section'=>'id'), 'through'=>'quests')
+        );
+	}
+	public function published($desc=' DESC')
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'order' => 't.time'.$desc,
+		));
 
+		return $this;
+	}
+	public function primaryKey() {
+		return 'time';
+	}
 	public function tableName()
 	{
 		return '{{attempts}}';
