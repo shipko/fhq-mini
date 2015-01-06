@@ -38,10 +38,13 @@ class users extends CActiveRecord {
 		return parent::beforeSave();
 	}
 	
-	public function published($desc=' DESC')
+	public function published($row=false, $desc=' DESC')
 	{
+		if(!$row) 
+			return $this;
+
 		$this->getDbCriteria()->mergeWith(array(
-			'order' => 'id'.$desc,
+			'order' => $row.$desc,
 		));
 
 		return $this;

@@ -10,7 +10,11 @@ class UserController extends CController
 
 	public function actionList()
 	{
-		$users = Users::model()->published('')->paginator()->findAll(array(
+		$order = Yii::app()->request->getParam('order');
+		if ($order != 'rating')
+			$order = false;
+
+		$users = Users::model()->published($order)->paginator()->findAll(array(
 			'select' => 'id, role, nick, activated, rating',
 			//'condition' => 'deleted=0' //проверка на удаление 
 		));
@@ -34,7 +38,7 @@ class UserController extends CController
 	{
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
-
+		
 		$users = Users::model()->findByPk(Yii::app()->request->getParam('id'),array(
 			'select' => 'id, role, nick, activated, rating, json_data, date_create, date_last_signin',
 			'condition'=>'id=:id',
