@@ -26,7 +26,12 @@ class AuthController extends CController
 
 		$users->setIsNewRecord(true);
 
-		$users->role = 1;
+		// Возможность устанавливать роль только для администратора
+		if(Yii::app()->params->log_in && Yii::app()->params->scopes('admin'))
+			$users->role = (((int)Yii::app()->request->getParam('mail') == 2) ? 2 : 1);
+		else
+			$users->role = 1;
+
 
 		$users->uuid = new CDbExpression('UUID()');
 		$users->pass = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));

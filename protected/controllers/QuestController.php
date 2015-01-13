@@ -407,7 +407,7 @@ class QuestController extends CController
 		if (!Yii::app()->params->scopes('admin'))
 			Message::Error("You do not have sufficient permissions");
 
-		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published()->findAll();
+		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published('')->findAll();
 		//print_r($attempts);
 		$arrray = array();
 		foreach($attempts as $key => $value) {
