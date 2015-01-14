@@ -12,18 +12,12 @@ class users extends CActiveRecord {
 	public function rules()
 	{
 		return array(
-
+			array('rating', 'numerical', 'integerOnly'=>true),
 			array('nick','length','max'=>30),
-			array('password'.'length','min'=>6,'max'=>32),
+			array('pass','length','min'=>6,'max'=>64),
 			array('uuid, role, nick, pass, mail, rating, activated, activation_code, date_create, date_last_signup', 'required'),
-			array('nick, password, mail', 'filter', 'filter' => 'trim'),
-			// array('date_last_signup', 
-			// 	'default',
-			// 	'value'=>new CDbExpression('NOW()'),
-			// 	'setOnEmpty'=>false,
-			// 	'on'=>'insert'
-			// 	),
-			);
+			array('nick, pass, mail', 'filter', 'filter' => 'trim'),
+		);
 	}
 
 	public function beforeSave()

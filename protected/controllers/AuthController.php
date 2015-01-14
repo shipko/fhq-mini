@@ -22,13 +22,17 @@ class AuthController extends CController
 		if (!Yii::app()->request->getParam('mail'))
 			Message::Error('Parameter mail is missing');
 
+		$validator = new CEmailValidator;
+		if (!$validator->validateValue(Yii::app()->request->getParam('mail')))
+			Message::Error('It is not mail');
+		
 		$users = new Users;
 
 		$users->setIsNewRecord(true);
 
 		// Возможность устанавливать роль только для администратора
 		if(Yii::app()->params->log_in && Yii::app()->params->scopes('admin'))
-			$users->role = (((int)Yii::app()->request->getParam('mail') == 2) ? 2 : 1);
+			$users->role = (((int)Yii::app()->request->getParam('role') == 2) ? 2 : 1);
 		else
 			$users->role = 1;
 
