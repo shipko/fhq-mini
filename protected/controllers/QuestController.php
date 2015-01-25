@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * usersController is the controller to handle user requests.
@@ -156,9 +156,10 @@ class QuestController extends CController
 
 	public function actionList()
 	{
-		// if (!Yii::app()->params->scopes('admin'))
-		// 	Message::Error("You do not have sufficient permissions");
-		
+		$select = 't.id, title, section, short_text, full_text, score';
+		if (Yii::app()->params->scopes('admin'))
+			$select = 't.id, title, section, short_text, full_text, score, answer';
+			
 		$section = Quests::model()->
 			published('')->
 			showHide(Yii::app()->params->scopes('admin'))->
@@ -166,13 +167,13 @@ class QuestController extends CController
 				'stitle' => array(
 					'select' => 'id, title'
 				),
-				'pass' => array(
+				'passed' => array(
 					'select' => 'id, start_time, end_time',
-					'condition' => 'pass.user='.Yii::app()->params->user['user_id'] 
+					'condition' => 'passed.user='.Yii::app()->params->user['user_id'] 
 				)
 			))->
 			paginator()->
-			findAll(array('select' => 't.id, title, section, short_text, full_text, score'));
+			findAll(array('select' => $select));
 
 		$array = array(); 
 		$count = 0;
@@ -180,10 +181,10 @@ class QuestController extends CController
 		foreach($section as $value) {
 			$count++;
 
-			if (!empty($value->pass)) {
-				$pass = $value->pass[0]->getAttributes(false);
+			if (!empty($value->passed)) {
+				$passed = $value->passed[0]->getAttributes(false);
 				// Проверяем сдал ли пользователь квест
-				$passquest = ($pass['end_time'] > 0);
+				$passquest = ($passed['end_time'] > 0);
 				
 			}
 			else
@@ -192,7 +193,7 @@ class QuestController extends CController
 			// False - return without null values;
 			$arr = $value->getAttributes(false);
 			$arr['section'] = $value->stitle->getAttributes(false);
-			$arr['pass'] = $passquest;
+			$arr['passed'] = $passquest;
 			$array[] = $arr;
 		}
 
@@ -342,6 +343,7 @@ class QuestController extends CController
 	{
 		if (!Yii::app()->params->scopes('admin'))
 			Message::Error("You do not have sufficient permissions");
+
 		// Быть может добавим пагинатор позже, но сейчас это не нужно
 		$section = QuestSection::model()->published('')->findAll(array(
 			'select' => 'id, title',
@@ -407,14 +409,16 @@ class QuestController extends CController
 		if (!Yii::app()->params->scopes('admin'))
 			Message::Error("You do not have sufficient permissions");
 
+
 		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published('')->findAll();
-		//print_r($attempts);
+	
 		$arrray = array();
 		foreach($attempts as $key => $value) {
 			$record = $value->getAttributes();
 			
 			$record['quest'] = $value->quests->getAttributes(false);
 			$record['quest']['section'] = $value->quest_section->getAttributes(false)['title'];
+			
 			$array[] = $record;
 		}
 		Message::Success($array);

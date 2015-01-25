@@ -47,7 +47,7 @@ class AuthController extends CController
 		$users->nick = Yii::app()->request->getParam('nick');
 		$users->rating = 0;
 		$users->date_create = new CDbExpression('NOW()');
-		$users->date_last_signup = new CDbExpression('NOW()');
+		$users->date_last_signin = new CDbExpression('NOW()');
 		
 		// Потенциальная уязвимость!!!
 		$users->ip = $_SERVER['REMOTE_ADDR'];

@@ -33,7 +33,7 @@ class Quests extends CActiveRecord {
 	{
 		return array(
             'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
-            'pass' => array(self::HAS_MANY, 'UserQuest','quest')
+            'passed' => array(self::HAS_MANY, 'UserQuest','quest')
         );
 	}
 

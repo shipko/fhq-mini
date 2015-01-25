@@ -14,8 +14,12 @@ class UserController extends CController
 		if ($order != 'rating')
 			$order = false;
 
+		$select = 'id, role, nick, activated, rating';
+		if (Yii::app()->params->scopes('admin'))
+			$select = 'id, role, nick, activated, mail, rating, json_data, date_create, date_last_signin';
+
 		$users = Users::model()->published($order)->paginator()->findAll(array(
-			'select' => 'id, role, nick, activated, rating',
+			'select' => $select,
 			//'condition' => 'deleted=0' //проверка на удаление 
 		));
 		
@@ -39,8 +43,12 @@ class UserController extends CController
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 		
+		$select = 'id, nick, rating';
+		if (Yii::app()->params->scopes('admin'))
+			$select = 'id, role, nick, activated, mail, rating, json_data, date_create, date_last_signin';
+
 		$users = Users::model()->findByPk(Yii::app()->request->getParam('id'),array(
-			'select' => 'id, role, nick, activated, rating, json_data, date_create, date_last_signin',
+			'select' => $select,
 			'condition'=>'id=:id',
     		'params'=>array(':id'=> Yii::app()->request->getParam('id')),
 		));
@@ -75,7 +83,12 @@ class UserController extends CController
 	// Не готово
 	public function actionEdit()
 	{
-		exit('method closed');
+		if (!Yii::app()->params->log_in)
+			Message::Error('You are not logged');
+
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 
@@ -85,18 +98,17 @@ class UserController extends CController
 		if (!Yii::app()->request->getParam('nick'))
 			Message::Error("Nick is empty");
 
-		// Пока зашитый id, в будущем берем по access_token
-		$users = Users::model()->findByPk(19);
+		$users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
 		// $users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
-
+		
 		if (empty($users))
 			Message::Error('The user does not exist');
 				
 		$users->mail = Yii::app()->request->getParam('mail');
 		$users->nick = Yii::app()->request->getParam('nick');
 
-		$users->date_last_signup = new CDbExpression('NOW()');
-
+		if (Yii::app()->request->getParam('password') != '')
+			$users->password = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));
 		
 		if ($users->save())
 			Message::Success('1');

@@ -15,7 +15,9 @@ class users extends CActiveRecord {
 			array('rating', 'numerical', 'integerOnly'=>true),
 			array('nick','length','max'=>30),
 			array('pass','length','min'=>6,'max'=>64),
-			array('uuid, role, nick, pass, mail, rating, activated, activation_code, date_create, date_last_signup', 'required'),
+			array('mail','unique', 'message'=>'This mail already exists.'),
+			array('nick','unique', 'message'=>'This nick already exists.'),
+			array('uuid, role, nick, pass, mail, rating, activated, activation_code, date_create, date_last_signin', 'required'),
 			array('nick, pass, mail', 'filter', 'filter' => 'trim'),
 		);
 	}
@@ -23,11 +25,11 @@ class users extends CActiveRecord {
 	public function beforeSave()
 	{
 		if ($this->isNewRecord) {
-			// $this->date_create = new CDbExpression('NOW()');
+			$this->date_create = new CDbExpression('NOW()');
 			$this->rating = 0;
 		}
 
-		// $this->date_last_signup = new CDbExpression('NOW()');
+		$this->date_last_signin = new CDbExpression('NOW()');
 
 		return parent::beforeSave();
 	}

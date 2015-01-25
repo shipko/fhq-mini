@@ -31,7 +31,7 @@ class TokenController extends CController
 		// Пока закомментировано
 		// Логин и пароль совпали
 		$token = new Access_Tokens();
-		// $token->clearOldTokens($user->id);
+		$token->clearOldTokens($user->id);
 
 		$obj = $token->setToken($user->id, $user->role);
 
@@ -39,7 +39,8 @@ class TokenController extends CController
 			array(
 				'access_token' => $obj->access_token,
 				'user_id' => $obj->user_id,
-				'expires_in' => $obj->expires_in
+				'expires_in' => $obj->expires_in,
+				'role' => $user->role
 			)
 		);
 
