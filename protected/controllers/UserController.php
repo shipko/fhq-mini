@@ -10,6 +10,9 @@ class UserController extends CController
 
 	public function actionList()
 	{
+		if (!Yii::app()->params->log_in)
+			Message::Error('You are not logged');
+
 		$order = Yii::app()->request->getParam('order');
 		if ($order != 'rating')
 			$order = false;
@@ -40,6 +43,9 @@ class UserController extends CController
 	
 	public function actionGet()
 	{
+		if (!Yii::app()->params->log_in)
+			Message::Error('You are not logged');
+
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 		
@@ -56,7 +62,25 @@ class UserController extends CController
 		if(empty($users))
 			Message::Error('The user does not exist.');
 		
-		Message::Success($users->getAttributes(false));
+
+		$quest_passed = UserQuest::model()->findAll(array(
+			'condition'	=> 'user=:user',
+			'params' => array(':user' => Yii::app()->request->getParam('id'))
+		));
+
+		$count_passed = 0;
+		$count_processing = count($quest_passed);
+
+		foreach($quest_passed as $value) {
+			if($value->end_time > 0)
+				$count_passed++;
+		}
+		$array = $users->getAttributes(false);
+
+		$array['passed'] = $count_passed;
+		$array['processing'] = $count_processing;
+
+		Message::Success($array);
 	}
 
 	public function actionDelete()
@@ -108,7 +132,7 @@ class UserController extends CController
 		$users->nick = Yii::app()->request->getParam('nick');
 
 		if (Yii::app()->request->getParam('password') != '')
-			$users->password = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));
+			$users->pass = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));
 		
 		if ($users->save())
 			Message::Success('1');

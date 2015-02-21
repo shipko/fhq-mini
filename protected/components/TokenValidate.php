@@ -16,19 +16,23 @@ class TokenValidate extends CComponent {
 				Yii::app()->params->log_in = true;
 				Yii::app()->params->user = $query->attributes;
 
-				Yii::app()->params->scopes = function($scope) {
-					$dec_scope = decbin(Yii::app()->params->user['scope']);
-					
-					// Проверяем битовую маску
-					if (Yii::app()->params->user['scope'] & $this->scopes[$scope]) {
-						return true;
-					}
-
-					return false;
-				 };
+				
 			}
 		}
 
+		Yii::app()->params->scopes = function($scope) {
+			if (!Yii::app()->params->log_in) 
+				return false;
+			
+			$dec_scope = decbin(Yii::app()->params->user['scope']);
+			
+			// Проверяем битовую маску
+			if (Yii::app()->params->user['scope'] & $this->scopes[$scope]) {
+				return true;
+			}
+
+			return false;
+		 };
 	}
 }
 ?>

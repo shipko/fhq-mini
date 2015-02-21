@@ -261,7 +261,8 @@ class QuestController extends CController
 		}
 
 		if($user_quest->end_time > 0) {
-			Message::Error('You are already pass this quest');	
+			Message::Success(($quest->answer == $answer));
+			return true;
 		}
 
 		$attempts = new Attempts();
