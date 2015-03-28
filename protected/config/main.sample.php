@@ -66,6 +66,13 @@ return array(
 			'from' => 'my@mail.ru', // адрес отправителя
 			'author' => 'Dmitry Mukovkin',
 		),
+		'timer' => array(
+			'avaiable' => true,
+			// Формат (hour, minute, second, month, day, year)
+			'start' => mktime(23, 49, 11, 12, 12, 2014),
+			'end' => mktime(23, 55, 11, 12, 12, 2014),
+		), 
+
 		'paginator' => array(
 			'count' => 50, // Количество записей, выдаваемых API по умолчанию
 			'limit' => 500, // Максимальное количество записей
