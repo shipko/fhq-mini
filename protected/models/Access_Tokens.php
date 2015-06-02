@@ -15,7 +15,7 @@ class access_tokens extends CActiveRecord {
 		$this->scope = $scope;
 		$this->expires_in = time() + Yii::App()->params->tokenExpiresIn;
 		$this->issue_time = time();
-		$this->ip = CHttpRequest::getUserHostAddress();
+		$this->ip = (new CHttpRequest())->getUserHostAddress();
 
 		$this->save();
 

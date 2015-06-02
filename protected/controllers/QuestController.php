@@ -413,7 +413,7 @@ class QuestController extends CController
 
 		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published('')->findAll();
 	
-		$arrray = array();
+		$array = array();
 		foreach($attempts as $key => $value) {
 			$record = $value->getAttributes();
 			

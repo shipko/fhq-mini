@@ -2,6 +2,7 @@
 // Debug?
 define('YII_DEBUG',true);
 
+header('Access-Control-Allow-Origin: *');
 $dir = dirname(__FILE__);
 $yii = $dir.'/framework/yii.php';
 $config = $dir.'/protected/config/main.php';
