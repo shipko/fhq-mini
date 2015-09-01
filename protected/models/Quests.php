@@ -17,7 +17,7 @@ class Quests extends CActiveRecord {
 			array('title','length','min'=>3,'max'=>100),
 			array('short_text','length','min'=>5),
 			array('full_text','length','min'=>20),
-			array('answer', 'length','min'=>8,'max'=>255),
+			array('answer', 'length','min'=>4,'max'=>255),
 			array('answer', 'filter', 'filter' => 'trim'),
 			//
 			// array('date_create, date_change', 
