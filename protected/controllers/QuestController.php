@@ -106,8 +106,8 @@ class QuestController extends CController
 		if (!(int)Yii::app()->request->getParam('section'))
 			Message::Error('Parameter section is missing');
 
-		if (!Yii::app()->request->getParam('short_text'))
-			Message::Error('Parameter short_text is missing');
+//		if (!Yii::app()->request->getParam('short_text'))
+//			Message::Error('Parameter short_text is missing');
 		
 		if (!Yii::app()->request->getParam('full_text'))
 			Message::Error('Parameter full_text is missing');
