@@ -10,7 +10,7 @@ class Quests extends CActiveRecord {
 	{
 		return array(
 			// required
-			array('title, section, owner, moderate, short_text, full_text, answer, score, time','required'),
+			array('title, section, owner, moderate, full_text, answer, score, time','required'),
 			
 			//length
 			array('id', 'numerical', 'integerOnly' => true),

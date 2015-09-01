@@ -1,2 +1,5 @@
+.idea/*
+
 /protected/config/main.php
 /framework/
+
