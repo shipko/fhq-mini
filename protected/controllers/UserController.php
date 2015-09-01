@@ -32,7 +32,11 @@ class UserController extends CController
 		foreach($users as $value) {
 			$count++;
 			// False - return without null values;
-			$array[] = $value->getAttributes(false);
+			$item = $value->getAttributes(false);
+
+			$item['passed'] = '0';
+			$item['processing'] = '0';
+			$array[] = $item;
 		}
 
 		Message::Success(array(
