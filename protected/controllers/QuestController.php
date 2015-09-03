@@ -56,6 +56,7 @@ class QuestController extends CController
 		$quest->short_text = Yii::app()->request->getParam('short_text');
 		$quest->full_text = Yii::app()->request->getParam('full_text');
 		$quest->answer = Yii::app()->request->getParam('answer');
+		$quest->author = Yii::app()->request->getParam('author');
 		$quest->score = (int)Yii::app()->request->getParam('score');
 
 		$quest->time = new CDbExpression('NOW()');
@@ -129,6 +130,7 @@ class QuestController extends CController
 		$quest->short_text = Yii::app()->request->getParam('short_text');
 		$quest->full_text = Yii::app()->request->getParam('full_text');
 		$quest->answer = Yii::app()->request->getParam('answer');
+		$quest->author = Yii::app()->request->getParam('author');
 		$quest->score = (int)Yii::app()->request->getParam('score');
 		
 		if($quest->save())
