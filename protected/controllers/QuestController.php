@@ -160,7 +160,7 @@ class QuestController extends CController
 	{
 		$select = 't.id, title, section, short_text, full_text, score';
 		if (Yii::app()->params->scopes('admin'))
-			$select = 't.id, title, section, short_text, full_text, score, answer';
+			$select = 't.id, title, section, short_text, full_text, score, answer, author';
 			
 		$section = Quests::model()->
 			published('')->
