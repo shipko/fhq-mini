@@ -162,7 +162,7 @@ class QuestController extends CController
 
 	public function actionList()
 	{
-		$select = 't.id, title, section, short_text, full_text, score';
+		$select = 't.id, title, section, short_text, full_text, score, author';
 		if (Yii::app()->params->scopes('admin'))
 			$select = 't.id, title, section, short_text, full_text, score, answer, author';
 			
