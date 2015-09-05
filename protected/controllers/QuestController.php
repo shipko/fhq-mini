@@ -250,7 +250,7 @@ class QuestController extends CController
 		if (!$id)
 			Message::Error('Parameter id is missing');
 
-		$answer = Yii::app()->request->getParam('answer');
+		$answer = strtolower(Yii::app()->request->getParam('answer'));
 		if (!$answer)
 			Message::Error('Parameter answer is missing');
 
@@ -286,7 +286,7 @@ class QuestController extends CController
 			Message::Error($attempts->getErrors());			
 		}
 
-		$success = ($quest->answer == $answer);
+		$success = (strtolower($quest->answer) == $answer);
 
 		if ($success) {
 			$user_quest->end_time = time();
