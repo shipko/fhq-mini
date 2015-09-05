@@ -134,6 +134,7 @@ class UserController extends CController
 				
 		$users->mail = Yii::app()->request->getParam('mail');
 		$users->nick = Yii::app()->request->getParam('nick');
+		$users->role = Yii::app()->request->getParam('role');
 
 		if (Yii::app()->request->getParam('password') != '')
 			$users->pass = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));
