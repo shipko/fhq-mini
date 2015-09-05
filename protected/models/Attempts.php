@@ -15,8 +15,8 @@ class Attempts extends CActiveRecord {
 			//length
 			array('user', 'numerical', 'integerOnly'=>true),
 			array('quest', 'numerical', 'integerOnly'=>true),
-			array('user_answer', 'length','min'=>8,'max'=>255),
-			array('real_answer','length','min'=>8,'max'=>255),
+			array('user_answer', 'length','min'=>4,'max'=>255),
+			array('real_answer','length','min'=>4,'max'=>255),
 			array('user_answer', 'filter', 'filter' => 'trim'),
 		);
 	}
