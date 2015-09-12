@@ -22,6 +22,10 @@ class AuthController extends CController
 		if (!Yii::app()->request->getParam('mail'))
 			Message::Error('Parameter mail is missing');
 
+		if (!Yii::app()->request->getParam('university'))
+			Message::Error('Parameter university is missing');
+
+
 		$validator = new CEmailValidator;
 		if (!$validator->validateValue(Yii::app()->request->getParam('mail')))
 			Message::Error('It is not mail');
@@ -40,7 +44,7 @@ class AuthController extends CController
 		$users->uuid = new CDbExpression('UUID()');
 		$users->pass = CPasswordHelper::hashPassword(Yii::app()->request->getParam('password'));
 		$users->mail = Yii::app()->request->getParam('mail');
-		$users->json_data = CJSON::encode(array());
+		$users->json_data = CJSON::encode(array('university' => Yii::app()->request->getParam('university')));
 		$users->date_activated = false;
 		$users->activated = 0;
 		$users->activation_code = uniqid(); // Случайное число
@@ -81,7 +85,7 @@ class AuthController extends CController
 			'to' => $mail,
 			'text' => 'Restore: </br>
 
-	Somebody (may be you) reseted your password on '.Yii::app()->name.'</br>
+	Somebody (may be you) reseted your password on ' . Yii::app()->name.'</br>
 	Your new password: test</br>'
 
 			));

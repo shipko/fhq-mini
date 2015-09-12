@@ -25,7 +25,8 @@ class Attempts extends CActiveRecord {
 	{
 		return array(
             'quests' => array(self::BELONGS_TO, 'Quests', 'quest'),
-            'quest_section' => array(self::HAS_ONE, 'QuestSection', array('section'=>'id'), 'through'=>'quests')
+            'quest_section' => array(self::HAS_ONE, 'QuestSection', array('section'=>'id'), 'through'=>'quests'),
+			'users' => array(self::BELONGS_TO, 'Users', 'user')
         );
 	}
 	public function published($desc=' DESC')
@@ -36,6 +37,27 @@ class Attempts extends CActiveRecord {
 
 		return $this;
 	}
+
+	public function paginator() {
+		$count = abs((int)Yii::app()->request->getParam('count'));
+		if (!$count)
+			$count = Yii::app()->params['paginator']['count'];
+
+		if ($count > Yii::app()->params['paginator']['limit'])
+			$count = Yii::app()->params['paginator']['limit'];
+
+		$offset = abs((int)Yii::app()->request->getParam('offset'));
+		if (!$offset)
+			$offset = 0;
+
+		$this->getDbCriteria()->mergeWith(array(
+			'limit' => $count,
+			'offset' => $offset
+		));
+
+		return $this;
+	}
+
 	public function primaryKey() {
 		return 'time';
 	}

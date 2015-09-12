@@ -417,13 +417,23 @@ class QuestController extends CController
 			Message::Error("You do not have sufficient permissions");
 
 
-		$attempts = Attempts::model()->with(array('quests' => array('select' => 'title'), array('quest_section' => array('select' => 'title'))))->published('')->findAll();
+		$attempts = Attempts::model()->with(
+				array(
+					'quests' => array('select' => 'title'),
+					'users' => array('select' => 'nick'),
+					array('quest_section' => array('select' => 'title'))
+				)
+			)
+			->paginator()
+			->published('')
+			->findAll();
 	
 		$array = array();
 		foreach($attempts as $key => $value) {
 			$record = $value->getAttributes();
-			
+
 			$record['quest'] = $value->quests->getAttributes(false);
+			$record['user'] = $value->users->getAttributes(false);
 			$record['quest']['section'] = $value->quest_section->getAttributes(false)['title'];
 			
 			$array[] = $record;

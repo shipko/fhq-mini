@@ -1,6 +1,6 @@
 <?php
 // Debug?
-define('YII_DEBUG',true);
+define('YII_DEBUG',false);
 
 header('Access-Control-Allow-Origin: *');
 $dir = dirname(__FILE__);
