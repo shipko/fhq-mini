@@ -52,7 +52,7 @@ class Attempts extends CActiveRecord {
 
 		$this->getDbCriteria()->mergeWith(array(
 			'limit' => $count,
-			'offset' => $offset
+			//'offset' => $offset
 		));
 
 		return $this;
