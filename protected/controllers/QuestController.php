@@ -276,17 +276,17 @@ class QuestController extends CController
 		$attempts->user = Yii::app()->params->user['user_id'];
 		$attempts->quest = $quest->id;
 		
-		$attempts->user_answer = $answer;
-		$attempts->real_answer = $quest->answer;
+		$attempts->user_answer = strtolower($answer);
+		$attempts->real_answer = strtolower($quest->answer);
 
 		$attempts->time = time();
 
 		if(!$attempts->save()) 
 		{
-			Message::Error($attempts->getErrors());			
+			Message::Error($attempts->getErrors());
 		}
 
-		$success = (strtolower($quest->answer) == $answer);
+		$success = (strtolower($quest->answer) == strtolower($answer));
 
 		if ($success) {
 			$user_quest->end_time = time();
@@ -425,7 +425,7 @@ class QuestController extends CController
 				)
 			)
 			->paginator()
-			->published('')
+			->published()
 			->findAll();
 	
 		$array = array();
