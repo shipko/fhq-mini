@@ -1,0 +1,386 @@
+Array
+(
+)
+Array
+(
+)
+Array
+(
+)
+Array
+(
+    [asd] => 
+)
+Array
+(
+)
+Array
+(
+    [asd] => 
+)
+api.keva.sukeep-alivemax-age=0text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.81Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.361gzip, deflate, sdchru,en;q=0.8,it;q=0.6Array
+(
+)
+api.keva.suArray
+(
+)
+Array
+(
+    [Host] => api.keva.su
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0 Iceweasel/31.8.0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.5
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_CONNECTION] => keep-alive
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 24270
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445157921
+    [REQUEST_TIME] => 1445157921
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.139.35
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 38838
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.0
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445157943.22
+    [REQUEST_TIME] => 1445157943
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0 Iceweasel/31.8.0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.5
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 14035
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445157994.529
+    [REQUEST_TIME] => 1445157994
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.139.35
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 38840
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.0
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445158006.989
+    [REQUEST_TIME] => 1445158006
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.139.35
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 38842
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.0
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445158007.821
+    [REQUEST_TIME] => 1445158007
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 0
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ORIGIN] => http://api.keva.su
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.36
+    [CONTENT_TYPE] => application/x-www-form-urlencoded
+    [HTTP_DNT] => 1
+    [HTTP_REFERER] => http://api.keva.su/sale.php
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_ACCEPT_LANGUAGE] => ru,en;q=0.8,it;q=0.6
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 58548
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445163276.502
+    [REQUEST_TIME] => 1445163276
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 0
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ORIGIN] => http://api.keva.su
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.36
+    [CONTENT_TYPE] => application/x-www-form-urlencoded
+    [HTTP_DNT] => 1
+    [HTTP_REFERER] => http://api.keva.su/sale.php
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_ACCEPT_LANGUAGE] => ru,en;q=0.8,it;q=0.6
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 7474
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445163346.374
+    [REQUEST_TIME] => 1445163346
+)
+Array
+(
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 0
+    [HTTP_PRAGMA] => no-cache
+    [HTTP_CACHE_CONTROL] => no-cache
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ORIGIN] => http://api.keva.su
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.36
+    [CONTENT_TYPE] => application/x-www-form-urlencoded
+    [HTTP_DNT] => 1
+    [HTTP_REFERER] => http://api.keva.su/sale.php
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_ACCEPT_LANGUAGE] => ru,en;q=0.8,it;q=0.6
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 19381
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445163358.634
+    [REQUEST_TIME] => 1445163358
+)
+Array
+(
+    [apod] => rrfgg
+    [dop] => fggffg
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 21
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ORIGIN] => http://api.keva.su
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.36
+    [CONTENT_TYPE] => application/x-www-form-urlencoded
+    [HTTP_DNT] => 1
+    [HTTP_REFERER] => http://api.keva.su/sale.php
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_ACCEPT_LANGUAGE] => ru,en;q=0.8,it;q=0.6
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 47164
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445163451.144
+    [REQUEST_TIME] => 1445163451
+)
+Array
+(
+    [apod] => qwe
+    [dop] => qweeee
+)
+Array
+(
+    [HTTP_HOST] => api.keva.su
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 19
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ORIGIN] => http://api.keva.su
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.62 YaBrowser/15.10.2454.2433 (beta) Safari/537.36
+    [CONTENT_TYPE] => application/x-www-form-urlencoded
+    [HTTP_DNT] => 1
+    [HTTP_REFERER] => http://api.keva.su/sale.php
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_ACCEPT_LANGUAGE] => ru,en;q=0.8,it;q=0.6
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Debian) Server at api.keva.su Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Debian)
+    [SERVER_NAME] => api.keva.su
+    [SERVER_ADDR] => 80.89.147.41
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 193.218.138.31
+    [DOCUMENT_ROOT] => /var/www/api/fhq-api
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/api/fhq-api/t.php
+    [REMOTE_PORT] => 65080
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /t.php
+    [SCRIPT_NAME] => /t.php
+    [PHP_SELF] => /t.php
+    [REQUEST_TIME_FLOAT] => 1445163549.152
+    [REQUEST_TIME] => 1445163549
+)
