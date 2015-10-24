@@ -16,8 +16,12 @@ class TimerController extends CController
 
 	public function actionCurrent() {
 		Message::Success(array(
+<<<<<<< HEAD
 			'time' => time(),
 			'delta' => Yii::app()->params->timer['end'] - time()
+=======
+			'time' => time()
+>>>>>>> 2d695ac96a82f28b0aa577f1c95caca47eae588d
 		));
 	}
 

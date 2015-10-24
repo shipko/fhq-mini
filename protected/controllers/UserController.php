@@ -3,6 +3,7 @@
 /**
  * usersController is the controller to handle user requests.
  */
+
 class UserController extends CController
 {
     private $method = 'user';
@@ -155,58 +156,7 @@ class UserController extends CController
         else
             Message::Error($users->getErrors());
     }
-
-    public function actionGenerate()
-    {
-        $array = array(
-            array('mail' => 'reaper25b@yandex.ru', 'user' => 'olymp_1', 'pass' => 'StVMETEF'),
-            array('mail' => 'cresexe@mail.ru', 'user' => 'olymp_2', 'pass' => 'q6rFjlhZ'),
-            array('mail' => 'nikol98@ya.ru', 'user' => 'olymp_3', 'pass' => 'JU0eGRsS'),
-            array('mail' => 'artem.avtandilyan@gmail.com', 'user' => 'olymp_4', 'pass' => 'zeCvWxNG'),
-            array('mail' => 'sobolek-steam@bk.ru', 'user' => 'olymp_5', 'pass' => 'cHeAQpKA'),
-            array('mail' => 'razborik@gmail.com', 'user' => 'olymp_6', 'pass' => '0et407rq'),
-            array('mail' => 'ibragimoff.maks@mail.ru', 'user' => 'olymp_7', 'pass' => 'nYvpT43x'),
-            array('mail' => 'nightowl191@gmail.com', 'user' => 'olymp_8', 'pass' => 'hFJ9YVWV'),
-            array('mail' => 'kartashovslava@gmail.com', 'user' => 'olymp_9', 'pass' => 'cJJ7pZhe'),
-            array('mail' => 'rafinadikus@gmail.com', 'user' => 'olymp_10', 'pass' => 'wu2JrNI7'),
-            array('mail' => 'glazareyt@gmail.com', 'user' => 'olymp_11', 'pass' => 'srEx6Zgm'),
-            array('mail' => 'abora.13@mail.ru', 'user' => 'olymp_12', 'pass' => 'tSYPI8iN'),
-            array('mail' => 'rurunen@gmail.com', 'user' => 'olymp_13', 'pass' => 'iP08n0J0'),
-            array('mail' => 'kvasovasveta@yandex.ru', 'user' => 'olymp_14', 'pass' => 'Y8otz6ta'),
-            array('mail' => 'krekero4ek@gmail.com', 'user' => 'olymp_15', 'pass' => 't2I7o09Q'),
-            array('mail' => 'aborilo@inbox.ru', 'user' => 'olymp_16', 'pass' => 'IBZWDx8n'),
-            array('mail' => 'elenaida2@mail.ru', 'user' => 'olymp_17', 'pass' => 'DS3F1w0S'),
-            array('mail' => 'ierei_evgenii@mail.ru', 'user' => 'olymp_18', 'pass' => 'XzQNQ3T3'),
-            array('mail' => 'Nastya-demidovich@bk.ru', 'user' => 'olymp_19', 'pass' => 'IDrk0wCd'),
-            array('mail' => 'surviror@gmail.com', 'user' => 'olymp_20', 'pass' => 'kXH0P6C9')
-        );
-        foreach($array as $k=>$v) {
-            $users = new Users;
-
-            $users->setIsNewRecord(true);
-
-            $users->role = 1;
-
-
-            $users->uuid = new CDbExpression('UUID()');
-            $users->pass = CPasswordHelper::hashPassword($v['pass']);
-            $users->mail = $v['mail'];
-            $users->json_data = CJSON::encode(array());
-            $users->date_activated = false;
-            $users->activated = 0;
-            $users->activation_code = uniqid(); // Случайное число
-            $users->nick = $v['user'];
-            $users->rating = 0;
-            $users->date_create = new CDbExpression('NOW()');
-            $users->date_last_signin = new CDbExpression('NOW()');
-
-            // Потенциальная уязвимость!!!
-            $users->ip = $_SERVER['REMOTE_ADDR'];
-
-            $users->save();
-
-        }
-    }
+    
     public function actionSearch()
     {
         if (Yii::app()->params->timer['end']  < time() & !Yii::app()->params->scopes('admin')) {

@@ -21,7 +21,7 @@ class users extends CActiveRecord {
 			array('nick, pass, mail', 'filter', 'filter' => 'trim'),
 		);
 	}
-
+	
     public function relations()
     {
         return array(

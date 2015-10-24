@@ -20,13 +20,6 @@ class Quests extends CActiveRecord {
 			array('answer', 'length','min'=>4,'max'=>255),
 			array('answer', 'filter', 'filter' => 'trim'),
 			array('author', 'length', 'max'=>100)
-			//
-			// array('date_create, date_change', 
-			// 	'default',
-			// 	'value'=>new CDbExpression('NOW()'),
-			// 	'setOnEmpty'=>false,
-			// 	'on'=>'insert'
-			// 	),
 			);
 	}
 
@@ -34,6 +27,7 @@ class Quests extends CActiveRecord {
 	{
 		return array(
             'stitle' => array(self::BELONGS_TO, 'QuestSection', 'section'),
+
             'passed' => array(self::HAS_MANY, 'UserQuest','quest'),
 			'count' => array(self::HAS_MANY, 'UserQuest','quest'),
             'users' => array(self::MANY_MANY, 'Users','user_quest(quest, user)')
