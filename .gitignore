@@ -1,5 +1,5 @@
 .idea/*
 
-/protected/config/main.php
-/framework/
+api/protected/config/main.php
+api/framework/
 
