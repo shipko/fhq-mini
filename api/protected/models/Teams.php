@@ -13,16 +13,11 @@ class teams extends CActiveRecord {
 	{
 		return array(
 
+			array('nick','length','max'=>255),
 			array('logo','length','max'=>255),
-			array('title','length','max'=>255),
-			array('uuid_team, rating, title, owner, date_create, date_change', 'required'),
-			array('date_create, date_change', 
-				'default',
-				'value'=>new CDbExpression('NOW()'),
-				'setOnEmpty'=>false,
-				'on'=>'insert'
-				),
-			);
+			array('host','length','max'=>255),
+			array('rating','length','max'=>255),
+		);
 	}
 
 	public function published($desc=' DESC')
@@ -44,7 +39,7 @@ class teams extends CActiveRecord {
 
 		return parent::beforeSave();
 	}
-	public function primaryKey() 
+	public function primaryKey()
 	{
 		return 'id';
 	}

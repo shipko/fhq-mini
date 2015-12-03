@@ -13,30 +13,20 @@ class TeamsController extends CController
 		if (!Yii::app()->params->log_in)
 			Message::Error('You are not logged');
 
-		if (!Yii::app()->request->getParam('title'))
-			Message::Error("Title is empty");
+		if (!Yii::app()->request->getParam('nick'))
+			Message::Error("Nick is empty");
 
-		
+
 		$teams = new Teams;
 
 		$teams->setIsNewRecord(true);
 
-		$teams->title = Yii::app()->request->getParam('title');
-
-		$teams->owner = Yii::app()->params->user['user_id'];
-
-		$teams->uuid_team = new CDbExpression('UUID()');
-		$teams->rating = 0;
+		$teams->nick = Yii::app()->request->getParam('nick');
+		$teams->host = Yii::app()->request->getParam('host');
+		$teams->rating = Yii::app()->request->getParam('rating');
 
 		$logo = Yii::app()->request->getParam('logo');
 		$teams->logo = (!empty($logo) ? $logo : '');
-
-		$teams->json_data = CJSON::encode(array());
-		$teams->json_security_data = CJSON::encode(array());
-		
-		$teams->date_create = new CDbExpression('NOW()');
-		$teams->date_change = new CDbExpression('NOW()');
-
 
 		if ($teams->save())
 			Message::Success(array('id' => $teams->id));
@@ -49,9 +39,9 @@ class TeamsController extends CController
 	public function actionList()
 	{
 		$teams = Teams::model()->published()->findAll(array(
-			'select' => 'id, rating, logo, title',
+			'select' => 'id, nick, logo, host, rating',
 		));
-		
+
 		$array = array();
 		$count = 0;
 
@@ -66,7 +56,7 @@ class TeamsController extends CController
 			'items' => $array
 		));
 	}
-	
+
 	public function actionGet()
 	{
 		if (!Yii::app()->request->getParam('id'))
@@ -76,12 +66,12 @@ class TeamsController extends CController
 		$games = Teams::model()->findByPk($id,array(
 			'select' => 'id, json_data, date_create, date_last_signin',
 			'condition'=>'id=:id',
-    		'params'=>array(':id'=> $id),
+			'params'=>array(':id'=> $id),
 		));
 
 		if(empty($games))
 			Message::Error('The games does not exist.');
-		
+
 		Message::Success($games->getAttributes(false));
 	}
 
@@ -90,8 +80,12 @@ class TeamsController extends CController
 		if (!Yii::app()->params->log_in)
 			Message::Error('You are not logged');
 
+		if (!Yii::app()->params->scopes('admin'))
+			Message::Error("You do not have sufficient permissions");
+
+
 		$id = (int)Yii::app()->request->getParam('id');
-		if (!$id) 
+		if (!$id)
 			Message::Error('Parameter id is missing');
 
 		$teams = Teams::model()->findByPk($id);
@@ -99,52 +93,45 @@ class TeamsController extends CController
 		if (!$teams)
 			Message::Error("The team doesn't exists");
 
-		print_r($teams);
 
-		// if (!Yii::app()->params->scopes('admin'))
-		// 	Message::Error("You do not have sufficient permissions");
 
-		// if (!Yii::app()->request->getParam('id'))
-		// 	Message::Error('Parameter id is missing');
+		$teams->delete();
 
-		// $users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
-
-		// if (empty($users))
-		// 	Message::Error('The user does not exist');
-
-		// $users->delete();
-
-		// Message::Success('1');
+		Message::Success('1');
 	}
 
 	// Не готово
-	public function actionEdit()
+	public function actionSave()
 	{
 		if (!Yii::app()->request->getParam('id'))
 			Message::Error('Parameter id is missing');
 
-		if (!Yii::app()->request->getParam('mail'))
-			Message::Error("Mail is empty");
-
 		if (!Yii::app()->request->getParam('nick'))
 			Message::Error("Nick is empty");
 
+		if (!Yii::app()->request->getParam('host'))
+			Message::Error("Host is empty");
+
+		if (!Yii::app()->request->getParam('rating'))
+			Message::Error("Rating is empty");
+
+		$id = (int)Yii::app()->request->getParam('id');
+
 		// Пока зашитый id, в будущем берем по access_token
-		$users = Users::model()->findByPk(19);
-		// $users = Users::model()->findByPk((int)Yii::app()->request->getParam('id'));
+		$teams = Teams::model()->findByPk($id);
 
-		if (empty($users))
-			Message::Error('The user does not exist');
-				
-		$users->mail = Yii::app()->request->getParam('mail');
-		$users->nick = Yii::app()->request->getParam('nick');
+		if (empty($teams))
+			Message::Error('The team does not exist');
 
-		$users->date_last_signup = new CDbExpression('NOW()');
+		$teams->nick = Yii::app()->request->getParam('nick');
+		$teams->logo = Yii::app()->request->getParam('logo');
+		$teams->host = Yii::app()->request->getParam('host');
+		$teams->rating = Yii::app()->request->getParam('rating');
 
-		
-		if ($users->save())
+
+		if ($teams->save())
 			Message::Success('1');
 		else
-			Message::Error($users->getErrors());
+			Message::Error($teams->getErrors());
 	}
 }
