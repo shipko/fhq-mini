@@ -4,7 +4,7 @@ define('YII_DEBUG',false);
 
 header('Access-Control-Allow-Origin: *');
 $dir = dirname(__FILE__);
-$yii = $dir.'/framework/yii.php';
+$yii = $dir.'/vendor/yiisoft/yii/framework/yii.php';
 $config = $dir.'/protected/config/main.php';
 
 

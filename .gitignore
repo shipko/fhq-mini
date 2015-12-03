@@ -3,3 +3,5 @@
 api/protected/config/main.php
 api/framework/
 
+api/vendor/
+api/composer.lock
