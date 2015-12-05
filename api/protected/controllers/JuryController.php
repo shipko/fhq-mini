@@ -47,6 +47,7 @@ class JuryController extends CController
                     "name" => "",
                     "round_length" => 10,
                     "flags" => array(
+                        "lifetime" => 4,
                         "port" => 2605
                     ),
                     "admin" => array(
