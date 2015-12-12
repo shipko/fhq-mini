@@ -9,6 +9,7 @@ class teams extends CActiveRecord {
 	{
 		return array(
 			array('nick','length','max'=>255),
+			array('nick','unique', 'message'=>'This nick  is already exists.'),
 			array('logo','length','max'=>255),
 			array('host','length','max'=>255),
 			array('rating','length','max'=>255),
