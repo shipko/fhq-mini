@@ -1,9 +1,5 @@
 <?php
 class teams extends CActiveRecord {
-	public $date_create;
-
-	public $date_change;
-
 	public static function model($classname=__CLASS__)
 	{
 		return parent::model($classname);
@@ -12,7 +8,6 @@ class teams extends CActiveRecord {
 	public function rules()
 	{
 		return array(
-
 			array('nick','length','max'=>255),
 			array('logo','length','max'=>255),
 			array('host','length','max'=>255),
@@ -29,22 +24,12 @@ class teams extends CActiveRecord {
 		return $this;
 	}
 
-	public function beforeSave()
-	{
-		if ($this->isNewRecord) {
-			$this->date_create = new CDbExpression('NOW()');
-		}
-
-		$this->date_change = new CDbExpression('NOW()');
-
-		return parent::beforeSave();
-	}
 	public function primaryKey()
 	{
 		return 'id';
 	}
-	public function teams()
+	public function tableName()
 	{
-		return 'teams';
+		return '{{teams}}';
 	}
 }
