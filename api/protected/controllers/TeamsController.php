@@ -6,8 +6,6 @@
 
 class TeamsController extends CController
 {
-	private $method = 'teams';
-
 	public function actionCreate()
 	{
 		if (!Yii::app()->params->log_in)
@@ -25,8 +23,13 @@ class TeamsController extends CController
 		$teams->host = Yii::app()->request->getParam('host');
 		$teams->rating = Yii::app()->request->getParam('rating');
 
+		if (empty($teams->rating))
+			$teams->rating = '0';
+
 		$logo = Yii::app()->request->getParam('logo');
-		$teams->logo = (!empty($logo) ? $logo : '');
+
+		if (empty($logo))
+			$teams->logo = '';
 
 		if ($teams->save())
 			Message::Success(array('id' => $teams->id));
@@ -116,8 +119,7 @@ class TeamsController extends CController
 			Message::Error("Rating is empty");
 
 		$id = (int)Yii::app()->request->getParam('id');
-
-		// Пока зашитый id, в будущем берем по access_token
+		
 		$teams = Teams::model()->findByPk($id);
 
 		if (empty($teams))
