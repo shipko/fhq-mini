@@ -1,0 +1,5 @@
+protected/config/main.php
+framework/
+
+vendor/
+composer.lock
