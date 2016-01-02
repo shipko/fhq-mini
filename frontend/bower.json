@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
+    "ace": "^1.2.2",
     "backbone": "~1.2.2",
     "bootstrap": "~3.3.5",
     "eonasdan-bootstrap-datetimepicker": "~4.15.35",

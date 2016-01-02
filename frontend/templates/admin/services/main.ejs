@@ -1,6 +1,6 @@
 <div class="row" style="margin-left: 20px">
 <h1>Управление сервисами <button type="button" class="btn btn-sm btn-success glyphicon glyphicon-plus service-add" data-id=""></button></h1>
-<div class="col-md-6 col-xs-6" style="background: #fff">
+<div class="col-md-5 col-xs-5" style="background: #fff">
     <table class="table table-hover">
         <caption>В базе находится <span class="count_service"></span></caption>
         <thead>
@@ -14,7 +14,7 @@
         <tbody id="service-list"></tbody>
     </table>
 </div>
-<div class="col-md-5 col-xs-5 col-md-offset-1 affix sidebar" id="service-form" style="right: 50px; top: 10px;"></div>
+<div class="col-md-6 col-xs-6 col-md-offset-1 affix sidebar" id="service-form" style="right: 50px; top: 10px;"></div>
 <div class="modalWindow"></div>
 
 <script type="text/template" id="modal-template">
@@ -50,10 +50,11 @@
             <input type="timeout" class="form-control" id="inputTimeout" placeholder="Введите время тайма сервиса" value="<%- timeout %>">
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-12">
-            <label for="inputAuthor">Код программы</label>
-            <textarea type="text" rows="10" cols="86" id="inputProgram" placeholder="Введите код программы"><%- program %></textarea>
+            <label for="inputAuthor">Код программы с новым текстовым редактором</label>
+            <pre id="editor" class="program"><%- program %></pre>
         </div>
     </div>
     <input type="hidden" id="inputType" value="<%- type %>" />

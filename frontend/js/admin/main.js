@@ -14,17 +14,16 @@ define(['backbone', 'underscore', 'jquery', 'jquery.cookie', 'security'], functi
     App.Events = _.extend({}, Backbone.Events);
     var app = {
         config: {
-            urlAPI: "http://localhost/index.php/method/",
+            urlAPI: "http://api.keva.su/method/",
             client_id: 'web'
         },
         cache: []
     };
     // Переписать
     Backbone.sync = function(method, model, options) {
-        //console.log(method, model, options);
         var params = {
             url: app.config.urlAPI + model.url,
-            type: 'GET',
+            type: options.method || 'GET',
             dataType: 'json'
         };
 

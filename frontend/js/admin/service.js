@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($, _, Backbone, wrapper) {
+define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap', 'ace/ace'], function($, _, Backbone, wrapper) {
 
     // Services
     App.Models.Service = Backbone.Model.extend({
@@ -94,6 +94,7 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
             this.collections = {};
             this.collections.Services = new App.Collections.ListService();
 
+            this.editor = null;
 
 
             this.collections.Services.fetch();
@@ -122,6 +123,10 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
             var view = new App.Views.ServiceForm({ model: model });
 
             this.blocks.form.html(view.render().el);
+
+            this.editor = ace.edit("editor");
+            this.editor.setTheme("./theme/github");
+            this.editor.session.setMode("./mode/python");
         },
 
         updateOneService: function(user) {
@@ -135,7 +140,7 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
                     id: this.$el.find('#inputId').val(),
                     name: this.$el.find('#inputName').val(),
                     timeout: this.$el.find('#inputTimeout').val(),
-                    program: this.$el.find('#inputProgram').val()
+                    program: this.editor.getValue()
                 },
                 self = this,
                 type = this.$el.find('#inputType').val();
@@ -150,7 +155,7 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
             });
 
             model = new model();
-            model.fetch({ params: params });
+            model.fetch({ method: "POST", params: params });
 
             this.listenTo(model, 'error', function(response) {
                 App.Events.trigger('services:form:message:show', response.message);

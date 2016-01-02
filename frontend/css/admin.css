@@ -21,3 +21,10 @@
 .sidebar__white {
 	background: #fff;
 }
+
+#editor {
+	width: 100%;
+	padding: 0;
+	height: 400px;
+	position: relative;
+}
