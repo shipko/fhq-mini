@@ -23,7 +23,8 @@ class JuryController extends CController
             $array_teams[] = array(
                 'name' => $team['nick'],
                 'network' => $team['host'],
-                'host' => $team['host']
+                'host' => $team['host'],
+                'logo' => $team['logo']
             );
         }
 
