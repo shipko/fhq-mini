@@ -109,6 +109,20 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap', 'ace/ace'], 
             App.Events.on('services:form:message:show', this.showFormMessage, this);
         },
 
+        setSyntax: function (editor) {
+            var first_line = editor.getValue().split('\n', 2)[0];
+
+            if(~first_line.indexOf('perl')) {
+                editor.session.setMode("./mode/perl");
+            }
+            else if (~first_line.indexOf('python')) {
+                editor.session.setMode("./mode/python");
+            }
+            else if (~first_line.indexOf('bash')) {
+                editor.session.setMode("./mode/bash");
+            }
+        },
+
         showForm: function(id) {
             console.log(id);
             if(typeof(id) == 'object') {
@@ -123,10 +137,14 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap', 'ace/ace'], 
             var view = new App.Views.ServiceForm({ model: model });
 
             this.blocks.form.html(view.render().el);
-
+            var self = this;
             this.editor = ace.edit("editor");
             this.editor.setTheme("./theme/github");
             this.editor.session.setMode("./mode/python");
+            this.setSyntax(this.editor);
+            this.editor.getSession().on('change', function(e) {
+                self.setSyntax(self.editor);
+            }, this);
         },
 
         updateOneService: function(user) {
