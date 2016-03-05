@@ -144,7 +144,7 @@ class UserController extends CController
         if (empty($users))
             Message::Error('The user does not exist');
 
-        $users->mail = Yii::app()->request->getParam(array('mail'));
+        $users->mail = Yii::app()->request->getParam('mail');
         $users->nick = Yii::app()->request->getParam('nick');
         $users->role = Yii::app()->request->getParam('role');
 
