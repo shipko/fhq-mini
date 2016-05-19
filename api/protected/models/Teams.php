@@ -12,6 +12,7 @@ class teams extends CActiveRecord {
 			array('nick','unique', 'message'=>'This nick  is already exists.'),
 			array('logo','length','max'=>255),
 			array('host','length','max'=>255),
+			array('network', 'length', 'max' => 255),
 			array('rating','length','max'=>255),
 		);
 	}

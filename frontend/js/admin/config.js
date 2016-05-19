@@ -13,7 +13,11 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'moment', 'datetimepicker
             this.setMethod(method);
         },
 
-        url: 'settings.get',
+        url: 'jury.get',
+
+        parse: function (data) {
+            return data['settings'];
+        },
 
         setMethod: function(method) {
             this.method = (method == 'get' ? 'get' : 'set');
@@ -21,7 +25,7 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'moment', 'datetimepicker
         },
 
         setUrl: function(string) {
-            this.url = 'settings.' + (string || this.method);
+            this.url = 'jury.' + (string || this.method);
         }
 
     });
@@ -30,8 +34,10 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'moment', 'datetimepicker
         el: '.container',
         template: new EJS({url: 'templates/admin/config/main.ejs'}).text,
         events: {
-            "click .submit-datetime": 'changeDate'
+            "click .submit-datetime": 'changeDate',
+            "click .submit-flags": 'changeFlags'
         },
+
         changeDate: function() {
             this.$el.find('.success-message').hide();
             var date = new dataSetting('set');
@@ -45,12 +51,31 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'moment', 'datetimepicker
             });
         },
 
-        setDate: function(data) {
-            $('#'+data.get('k')).datetimepicker({
-                locale: 'ru',
-                format: "DD-MM-YYYY HH:mm:ss",
-                defaultDate: moment(data.get('value'), 'DD-MM-YYYY HH:mm:ss')
+        changeFlags: function() {
+            this.$el.find('.success-message').hide();
+            var date = new dataSetting('set');
+
+            date.fetch({ params: { key: 'lifetime', value: this.$el.find('#lifetime input').val() } });
+            date.fetch({ params: { key: 'port', value: this.$el.find('#flags_port input').val() } });
+
+            var self = this;
+
+            this.listenTo(date, 'sync', function() {
+                self.$el.find('.success-message').show();
             });
+        },
+
+        setData: function(data) {
+            console.log(data);
+            this.$el.find('#round_length input').val(data.get('round_length'));
+            this.$el.find('#lifetime input').val(data.get('flags').lifetime);
+
+            this.$el.find('#flags_port input').val(data.get('flags').port);
+            //$('#'+data.get('k')).datetimepicker({
+            //    locale: 'ru',
+            //    format: "DD-MM-YYYY HH:mm:ss",
+            //    defaultDate: moment(data.get('value'), 'DD-MM-YYYY HH:mm:ss')
+            //});
         },
 
         setCurrentTime: function(data) {
@@ -79,14 +104,13 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'moment', 'datetimepicker
             wrapper.renderPage(this.template);
 
             this.currentTime = new currentTime();
-            this.date = new dataSetting('get');
+            this.data = new dataSetting('get');
 
             this.listenTo(this.currentTime, 'sync', this.setCurrentTime);
-            this.listenTo(this.date, 'sync', this.setDate);
+            this.listenTo(this.data, 'sync', this.setData);
 
             this.currentTime.fetch();
-            this.date.fetch({ params: { key: 'datetime_start' }});
-            this.date.fetch({ params: { key: 'datetime_end' }});
+            this.data.fetch({ params: { key: 'datetime_start' }});
 
             App.Events.on('page:update', function() {
                 self.destructTimer();
