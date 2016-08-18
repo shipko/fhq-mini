@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap', 'ace/ace'], function($, _, Backbone, wrapper) {
+define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap', 'ace'], function($, _, Backbone, wrapper) {
 
     // Services
     App.Models.Service = Backbone.Model.extend({

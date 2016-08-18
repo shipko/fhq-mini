@@ -2,10 +2,10 @@ requirejs.config({
     baseUrl: 'js/admin',
     paths: {
         app: '../app',
-        ace: '../../bower_components/ace/build/src',
+        ace: '//ace.c9.io/build/src/ace',
         jquery: '../vendors/jquery.min',
         'jquery.cookie': '../vendors/jquery.cookie',
-        backbone: '../vendors/backbone',
+        backbone: '../vendors/backbone-min',
         bootstrap: '../vendors/bootstrap.min',
         underscore: '../vendors/underscore-min',
         ejs: 'ejs',
