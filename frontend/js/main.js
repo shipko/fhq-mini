@@ -6,7 +6,7 @@ $(function() {
     Backbone.history.navigate('', {trigger: true});
     var App = {
         config: {
-            urlAPI: "http://api.keva.su/method/",
+            urlAPI: "http://127.0.0.1:81/",
             client_id: 'web'
         },
         cache: {

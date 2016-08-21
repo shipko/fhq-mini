@@ -7,9 +7,9 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
             nick: '',
             logo: '',
             host: '',
+            network: '',
             rating: '',
             type: 'add'
-
         },
 
         parse: function(response) {
@@ -138,6 +138,7 @@ define(['jquery', 'underscore', 'backbone', 'wrapper', 'bootstrap'], function($,
                     nick: this.$el.find('#inputNick').val(),
                     logo: this.$el.find('#inputLogo').val(),
                     host: this.$el.find('#inputHost').val(),
+                    network: this.$el.find('#inputNetwork').val(),
                     rating: this.$el.find('#inputRating').val()
                 },
                 self = this,
